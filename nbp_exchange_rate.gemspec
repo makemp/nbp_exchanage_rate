@@ -11,7 +11,8 @@ Gem::Specification.new do |spec|
   spec.summary       = %(Handles Polish National Bank exchange rate API)
   spec.license       = 'MIT'
 
-  spec.files         = %w(lib/nbp_exchange_rate.rb lib/nbp/exchange_rate.rb lib/nbp/version.rb)
+  spec.files         = %w(lib/nbp_exchange_rate.rb lib/nbp/exchange_rate.rb lib/nbp/version.rb lib/nbp/xml_file_list.rb
+                          lib/nbp/commons.rb)
   spec.require_paths = %w(lib)
 
   spec.add_development_dependency 'bundler', '~> 1.8'

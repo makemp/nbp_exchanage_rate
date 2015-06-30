@@ -1,9 +1,11 @@
 require 'open-uri'
 require 'date'
 require 'nori'
+require_relative './commons.rb'
 module NBP
   ExchangeError = Class.new(StandardError)
   class ExchangeRate
+    extend NBP::Commons
     attr_accessor :nbp_file_name # you can pass nbp_file_name directly
     attr_reader :data
     EXCHANGE_RATE_URL = 'http://www.nbp.pl/kursy/xml/'
@@ -15,10 +17,7 @@ module NBP
       end
 
       def on_date(date, table_name:, table_number:)
-        day =  normalize_time_period date.day.to_s
-        month = normalize_time_period date.month.to_s
-        year = date.year.to_s[-2..-1]
-        new day: day, month: month, year: year, table_name: table_name, table_number: table_number
+        new({ table_name: table_name, table_number: table_number }.merge nbp_date_format_hash(date))
       end
 
       private

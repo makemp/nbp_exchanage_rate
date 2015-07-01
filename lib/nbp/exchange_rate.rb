@@ -12,7 +12,7 @@ module NBP
 
     class << self
       %w(a b c).each do |suffix|
-        define_method("exchange_#{suffix}") { new latest: "Last#{suffix.upcase}" }
+        define_method("exchange_#{suffix}") { new "Last#{suffix.upcase}" }
         alias_method "last_#{suffix}", "exchange_#{suffix}"
       end
 
@@ -27,10 +27,9 @@ module NBP
       end
     end
 
-    def initialize(constant_element = 'z', file_extension = '.xml', **fields)
-      latest = fields[:latest]
-      if latest
-        @nbp_file_name = latest + file_extension
+    def initialize(base_file_name = nil, constant_element = 'z', file_extension = '.xml', **fields)
+      if base_file_name
+        @nbp_file_name = base_file_name + file_extension
       else
         @nbp_file_name = fields[:table_name] + fields[:table_number] + constant_element +
                          fields[:year] + fields[:month] + fields[:day] + file_extension

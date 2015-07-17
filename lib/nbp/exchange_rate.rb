@@ -19,12 +19,6 @@ module NBP
       def on_date(date, table_name:, table_number:)
         new({ table_name: table_name, table_number: table_number }.merge nbp_date_format_hash(date))
       end
-
-      private
-
-      def normalize_time_period(number_word)
-        number_word.size == 1 ? '0' + number_word : number_word
-      end
     end
 
     def initialize(base_file_name = nil, constant_element = 'z', file_extension = '.xml', **fields)
@@ -40,7 +34,7 @@ module NBP
 
     def fetch
       full_file_path = EXCHANGE_RATE_URL + nbp_file_name
-      @data = ::Nori.new.parse open(full_file_path).read
+      @data = ::Nori.new(parser: :rexml).parse open(full_file_path).read
     rescue OpenURI::HTTPError
       raise ExchangeError, 'Problem with connection or requested information not found.'
     end

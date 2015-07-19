@@ -8,7 +8,6 @@ module NBP
     extend NBP::Commons
     attr_accessor :nbp_file_name # you can pass nbp_file_name directly
     attr_reader :data
-    EXCHANGE_RATE_URL = 'http://www.nbp.pl/kursy/xml/'
 
     class << self
       %w(a b c).each do |suffix|
@@ -33,7 +32,7 @@ module NBP
     end
 
     def fetch
-      full_file_path = EXCHANGE_RATE_URL + nbp_file_name
+      full_file_path = Commons::CORE_WEB_PATH + nbp_file_name
       @data = ::Nori.new(parser: :rexml).parse open(full_file_path).read
     rescue OpenURI::HTTPError
       raise ExchangeError, 'Problem with connection or requested information not found.'

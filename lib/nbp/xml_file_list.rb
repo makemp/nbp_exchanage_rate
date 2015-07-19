@@ -6,7 +6,6 @@ module NBP
     attr_reader :dir_name, :matched_base_file_names
 
     BASE_NAME = 'dir'
-    CORE_WEB_PATH = 'http://www.nbp.pl/kursy/xml/'
 
     include Commons
 
@@ -17,7 +16,7 @@ module NBP
     end
 
     def fetch_file_names
-      dir_file = open(CORE_WEB_PATH + dir_name, 'r')
+      dir_file = open(Commons::CORE_WEB_PATH + dir_name, 'r')
       @matched_base_file_names = dir_file.each_line.with_object([]) do |line, arr|
         trim_line = line.strip
         arr << trim_line if trim_line[-6..-1] == @nbp_date_format_string

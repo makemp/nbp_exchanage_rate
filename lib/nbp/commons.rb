@@ -1,5 +1,6 @@
 module NBP
   module Commons
+    CORE_WEB_PATH = 'http://www.nbp.pl/kursy/xml/'
     def self.extended(base)
       base.private_class_method :normalize_time_period
     end

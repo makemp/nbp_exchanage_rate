@@ -2,7 +2,7 @@ require 'date'
 require 'open-uri'
 require_relative './commons.rb'
 module NBP
-  class XMLFileList
+  class XMLFilesList
     attr_reader :dir_name, :matched_base_file_names
 
     BASE_NAME = 'dir'
@@ -10,8 +10,8 @@ module NBP
     include Commons
 
     def initialize(date, file_extension = '.txt')
-      @dir_name = file_list_name(date) + file_extension
-      @nbp_date_format_string = nbp_date_format_string(date)
+      @dir_name = files_list_name(date) + file_extension
+      @formatted_date = nbp_date_format_string(date)
       @matched_base_file_names = []
     end
 
@@ -19,7 +19,7 @@ module NBP
       dir_file = open(Commons::CORE_WEB_PATH + dir_name, 'r')
       @matched_base_file_names = dir_file.each_line.with_object([]) do |line, arr|
         trim_line = line.strip
-        arr << trim_line if trim_line[-6..-1] == @nbp_date_format_string
+        arr << trim_line if trim_line[-6..-1] == formatted_date
       end
     end
 
@@ -37,12 +37,14 @@ module NBP
 
     private
 
+    attr_reader :formatted_date
+
     def nbp_date_format_string(date)
       date_hash = nbp_date_format_hash(date)
       date_hash[:year] + date_hash[:month] + date_hash[:day]
     end
 
-    def file_list_name(date)
+    def files_list_name(date)
       year = date.year.to_s
       return BASE_NAME if year[-2..-1] == DateTime.now.year.to_s[-2..-1]
       BASE_NAME + year

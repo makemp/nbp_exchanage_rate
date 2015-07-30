@@ -2,7 +2,7 @@ require_relative '../spec_helper'
 
 describe NBP::ExchangeRate do
   describe 'class methods' do
-    subject { NBP::ExchangeRate }
+    subject { described_class }
     it { is_expected.to respond_to(:last_a) }
     it { is_expected.to respond_to(:last_b) }
     it { is_expected.to respond_to(:last_c) }
@@ -69,7 +69,7 @@ describe NBP::ExchangeRate do
         }
       }
     end
-    subject { NBP::ExchangeRate.on_date(DateTime.parse('13-07-17'), table_name: 'h', table_number: '137') }
+    subject { described_class.on_date(DateTime.parse('13-07-17'), table_name: 'h', table_number: '137') }
     its(:fetch) { is_expected.to match expected }
   end
 end

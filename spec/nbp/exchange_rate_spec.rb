@@ -10,6 +10,7 @@ describe NBP::ExchangeRate do
     it { is_expected.to respond_to(:exchange_b) }
     it { is_expected.to respond_to(:exchange_c) }
     it { is_expected.to respond_to(:on_date) }
+    it { is_expected.to respond_to(:by_file) }
   end
 
   describe 'instance methods' do

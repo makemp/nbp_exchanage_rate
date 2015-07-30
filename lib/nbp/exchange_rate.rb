@@ -18,6 +18,10 @@ module NBP
       def on_date(date, table_name:, table_number:)
         new({ table_name: table_name, table_number: table_number }.merge nbp_date_format_hash(date))
       end
+
+      def by_file(filename)
+        new(base_file_name: filename)
+      end
     end
 
     def initialize(base_file_name = nil, constant_element = 'z', file_extension = '.xml', **fields)

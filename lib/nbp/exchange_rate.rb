@@ -22,6 +22,17 @@ module NBP
       def by_file(file_name)
         new(file_name)
       end
+
+      def all_exchange_rates(date)
+        file_names = files_names_on_date(date)
+        file_names.map { |file_name| new(file_name).fetch['tabela_kursow']['pozycja'] }.flatten
+      end
+
+      private
+
+      def files_names_on_date(date)
+        XMLFilesList.new(date).fetch_file_names
+      end
     end
 
     def initialize(base_file_name = nil, constant_element = 'z', file_extension = '.xml', **fields)

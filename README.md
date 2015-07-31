@@ -15,6 +15,30 @@ And then execute:
 
 ## Usage
 
+### Simplest: fetch all exchange rates on date
+
+```ruby
+  NBP::ExchangeRate.all_exchange_rates(date_object) # => Returns an array of hashes
+  # date_object must have day, month and year methods i.e DateTime.now
+  # Example output(shortened). Original, Polish language. API data and fields are in Polish
+  # [
+  #   {
+  #     "nazwa_waluty"=>"dolar amerykański",
+  #     "przelicznik"=>"1",
+  #     "kod_waluty"=>"USD",
+  #     "kurs_kupna"=>"3,7512",
+  #     "kurs_sprzedazy"=>"3,8270"
+  #   },
+  #   {
+  #     "nazwa_waluty"=>"dolar australijski",
+  #     "przelicznik"=>"1",
+  #     "kod_waluty"=>"AUD",
+  #     "kurs_kupna"=>"2,7293",
+  #     "kurs_sprzedazy"=>"2,7845"
+  #   }
+  # ]
+```
+
 ### Get list of files on date.
 To know which files are interesting.
 
@@ -111,7 +135,7 @@ OR just:
 ```ruby
   exchange_rate.fetch # => returns hash of exchange rate data
 ```
-  Example output in [one of specs](spec/nbp/exchange_rate_spec.rb)
+  Example output in [one of specs](spec/nbp/exchange_rate_spec.rb) Original, Polish language. API data and fields are in Polish.
 
 #### Retrieve exchange rate data from object
 ```ruby

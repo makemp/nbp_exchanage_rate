@@ -19,8 +19,8 @@ module NBP
         new({ table_name: table_name, table_number: table_number }.merge nbp_date_format_hash(date))
       end
 
-      def by_file(filename)
-        new(base_file_name: filename)
+      def by_file(file_name)
+        new(file_name)
       end
     end
 

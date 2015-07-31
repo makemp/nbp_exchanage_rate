@@ -70,8 +70,14 @@ To know which files are interesting.
 #### Create object using file name
 
 ```ruby
+  file_name = 'c137z130717'
+  exchange_rate = NBP::ExchangeRate.by_file(file_name)
+```
+OR just:
+
+```ruby
   filename = 'c137z130717'
-  exchange_rate = NBP::ExchangeRate.by_file(filename)
+  exchange_rate = NBP::ExchangeRate.new(file_name)
 ```
 
 #### Create object using date, table_name and table_number

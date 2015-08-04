@@ -49,6 +49,8 @@ module NBP
     def fetch
       full_file_path = Commons::CORE_WEB_PATH + nbp_file_name
       @data = ::Nori.new(parser: :rexml).parse open(full_file_path).read
+      fail ExchangeError, 'Missing field tabela_kursow in fetched data' unless @data.key?('tabela_kursow')
+      return @data
     rescue OpenURI::HTTPError
       raise ExchangeError, 'Problem with connection or requested information not found.'
     end

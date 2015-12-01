@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nbp_exchange_rate (1.1.0)
+    nbp_exchange_rate (1.2.0)
       nori (>= 2.4.0)
 
 GEM
@@ -51,3 +51,6 @@ DEPENDENCIES
   rspec-its
   rubocop
   webmock
+
+BUNDLED WITH
+   1.10.6

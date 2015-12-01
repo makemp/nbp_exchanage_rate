@@ -25,7 +25,15 @@ module NBP
 
       def all_exchange_rates(date)
         file_names = files_names_on_date(date)
-        file_names.map { |file_name| new(file_name).fetch['tabela_kursow']['pozycja'] }.flatten
+        mutex = Mutex.new
+        threads = []
+        data = file_names.each_with_object([]) do |file_name, arr|
+          threads << Thread.new do
+            mutex.synchronize { arr << new(file_name).fetch['tabela_kursow']['pozycja'] }
+          end
+        end
+        threads.map(&:join)
+        data.flatten
       end
 
       private

@@ -6,7 +6,7 @@ Includes methods which allow to connect with Polish National Bank exchange rate 
 Add this line to your application's Gemfile:
 
 ```ruby
-  gem 'nbp_exchange_rate', github: 'makemp/nbp_exchange_rate', branch: 'master'
+  gem 'nbp_exchange_rate'
 ```
 
 And then execute:
